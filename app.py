@@ -17,7 +17,6 @@ app = Flask(__name__)
 
 
 MODEL_PATH = './models/model.h5'
-
 model = load_model(MODEL_PATH)
 model.make_predict_function()          # Necessary
 
@@ -53,18 +52,6 @@ def upload():
         f.save(file_path)
 
         preds = model_predict(file_path, model)
-        
-
-        # if preds[0]>0.5:
-        #     acc=str(preds[0]*100)
-        #     result = '''Rice Blast Disease {}
-        #     {}
-        #     '''.format(acc,"....Fertilizers:Calcium silicate,Triazoles,Strobilurins")
-        # else:
-        #     acc=str(100-preds[0]*100)
-        #     result = '''Leaf Streak Disease {}
-        #     {}
-        #     '''.format(acc,"....Fertilizers:Use copper based fungicides,diflubenzuron")
         if preds[0][0]>0.1:
             result="PCOS"
         else:
